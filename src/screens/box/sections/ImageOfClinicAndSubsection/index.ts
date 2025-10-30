@@ -1,0 +1,12 @@
+export { ImageOfClinicAndSubsection } from "./ImageOfClinicAndSubsection";
+
+
+
+
+
+
+
+
+
+
+
