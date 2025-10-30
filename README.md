@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Medical Clinic Website
+
+A modern medical clinic website built with React, TypeScript, Vite, and Tailwind CSS.
+
+## Project Structure
+
+This is a Vite-powered React application featuring:
+
+- **React 18** with TypeScript
+- **Tailwind CSS** for styling
+- **Shadcn UI** components
+- **Lucide React** icons
+- Responsive design with modern animations
 
 ## Getting Started
 
-First, run the development server:
+### Installation
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at `http://localhost:5173`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Build for production:
 
-## Learn More
+```bash
+npm run build
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+my-app/
+├── src/
+│   ├── components/
+│   │   └── ui/          # Reusable UI components (button, card, input, badge)
+│   ├── lib/
+│   │   └── utils.ts     # Utility functions
+│   ├── screens/
+│   │   └── box/
+│   │       ├── sections/  # Page sections
+│   │       │   ├── HeaderSubsection/
+│   │       │   ├── ImageOfClinicAndSubsection/
+│   │       │   ├── DnaPosterSubsection/
+│   │       │   ├── LaboratorySectionSubsection/
+│   │       │   ├── InsuranceSectionSubsection/
+│   │       │   ├── HealthJourneySubsection/
+│   │       │   ├── ConsultationSectionSubsection/
+│   │       │   └── EndSubsection/
+│   │       └── Box.tsx    # Main page component
+│   ├── App.tsx
+│   └── index.tsx
+├── public/
+├── index.html
+├── tailwind.config.js
+├── tsconfig.json
+├── vite.config.ts
+└── package.json
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Features
 
-## Deploy on Vercel
+- **Header** with navigation and contact information
+- **Gallery** showcasing clinic facilities
+- **DNA Testing** section
+- **Laboratory Services** with detailed information
+- **Insurance Partners** display
+- **Health Journey** section with testimonials
+- **Doctor Consultations** with specialties
+- **Footer** with contact form and social links
+- Smooth scroll animations
+- Responsive design for all screen sizes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Technologies
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- React 18.2.0
+- TypeScript
+- Vite 6.0.4
+- Tailwind CSS 3.4.16
+- Shadcn UI components
+- Lucide React icons
+- Class Variance Authority
+
+## License
+
+© 2025. All rights reserved.
+"# Clinic-" 
