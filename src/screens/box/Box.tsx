@@ -8,6 +8,7 @@ import { ImageOfClinicAndSubsection } from "./sections/ImageOfClinicAndSubsectio
 import { InsuranceSectionSubsection } from "./sections/InsuranceSectionSubsection";
 import { LaboratorySectionSubsection } from "./sections/LaboratorySectionSubsection";
 import { BlogSection } from "./sections/BlogSection";
+import { BookingSection } from "./sections/BookingSection";
 import { AnimatedSection } from "../../components/ui/animated";
 import { BlogModal } from "../../components/ui/modal";
 
@@ -108,6 +109,16 @@ export const Box = () => {
           className="w-full"
         >
           <DnaPosterSubsection />
+        </AnimatedSection>
+
+        {/* Booking Section - появляется с масштабированием */}
+        <AnimatedSection
+          animation="fadeInScale"
+          delay={150}
+          duration={1.0}
+          className="w-full"
+        >
+          <BookingSection />
         </AnimatedSection>
 
         {/* Health Journey - появляется слева */}
