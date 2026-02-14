@@ -1,32 +1,14 @@
 services:
-  # Backend — Express.js (Stripe API)
   - type: web
-    name: clinic-api
+    name: clinic-app
     runtime: node
-    rootDir: server
-    buildCommand: npm install
-    startCommand: node index.js
+    buildCommand: npm install && npm run build
+    startCommand: npm start
     envVars:
       - key: STRIPE_SECRET_KEY
-        sync: false # вручную задать в Render Dashboard
+        sync: false
       - key: NODE_ENV
         value: production
-
-  # Frontend — React/Vite (Static Site)
-  - type: web
-    name: clinic-frontend
-    runtime: static
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    headers:
-      - path: /*
-        name: Cache-Control
-        value: public, max-age=0, must-revalidate
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
-    envVars:
       - key: VITE_FIREBASE_API_KEY
         sync: false
       - key: VITE_FIREBASE_AUTH_DOMAIN

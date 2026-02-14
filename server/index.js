@@ -1,6 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+import express from "express";
+import path from "path";
+import cors from "cors";
+import Stripe from "stripe";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -9,13 +16,12 @@ const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.json());
 
-// Health check
-app.get("/health", (req, res) => {
+// API routes
+app.get("/api/health", (req, res) => {
   res.json({ status: "ok" });
 });
 
-// Create Checkout Session endpoint
-app.post("/create-checkout-session", async (req, res) => {
+app.post("/api/create-checkout-session", async (req, res) => {
   try {
     const { priceId, successUrl, cancelUrl } = req.body;
 
@@ -25,7 +31,6 @@ app.post("/create-checkout-session", async (req, res) => {
       });
     }
 
-    // Create Checkout Session
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       line_items: [
@@ -50,9 +55,14 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Stripe backend server running on http://localhost:${PORT}`);
-  console.log(`📝 Make sure STRIPE_SECRET_KEY is set in your .env file`);
+// Serve static frontend (Vite build output)
+app.use(express.static(path.join(__dirname, "..", "dist")));
+
+// SPA fallback — all non-API routes serve index.html
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "dist", "index.html"));
 });
 
-
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

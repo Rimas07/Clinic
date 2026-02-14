@@ -192,9 +192,9 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         throw new Error("Stripe недоступен. Проверьте ключ.");
       }
 
-      const backendUrl = import.meta.env.VITE_STRIPE_BACKEND_URL;
-      if (backendUrl) {
-        const response = await fetch(`${backendUrl}/create-checkout-session`, {
+      const backendUrl = import.meta.env.VITE_STRIPE_BACKEND_URL || "";
+      {
+        const response = await fetch(`${backendUrl}/api/create-checkout-session`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -235,48 +235,7 @@ export const BookingModal: React.FC<BookingModalProps> = ({
         }
       }
 
-      const checkoutReadyStripe = stripe as StripeCheckoutCapable;
-      if (
-        checkoutReadyStripe &&
-        typeof checkoutReadyStripe.redirectToCheckout === "function"
-      ) {
-        try {
-          const result = (await Promise.race([
-            checkoutReadyStripe.redirectToCheckout({
-              mode: "payment",
-              lineItems: [
-                { price: selectedService.stripePriceId, quantity: 1 },
-              ],
-              successUrl: successUrl || window.location.origin,
-              cancelUrl: cancelUrl || window.location.origin,
-            }),
-            new Promise((_, reject) =>
-              setTimeout(() => reject(new Error("Таймаут")), 5000)
-            ),
-          ])) as { error?: { message?: string } };
-
-          if (result?.error) {
-            throw new Error(result.error.message || "Ошибка редиректа");
-          }
-          return;
-        } catch (err: unknown) {
-          const errorMessage =
-            err instanceof Error ? err.message : "Неизвестная ошибка";
-          if (errorMessage === "Таймаут") {
-            throw new Error(
-              "Редирект завис. Используйте Stripe Payment Links или настройте бэкенд endpoint."
-            );
-          }
-          throw err;
-        }
-      }
-
-      throw new Error(
-        "Для работы оплаты требуется один из вариантов:\n" +
-          "1. Бэкенд endpoint (VITE_STRIPE_BACKEND_URL)\n" +
-          "2. Stripe Payment Link (добавьте stripePaymentLink в конфигурацию услуги)\n" +
-          "3. Или создайте Payment Link в Stripe Dashboard и используйте его URL"
-      );
+      throw new Error("Не удалось перенаправить на страницу оплаты.");
     } catch (error: unknown) {
       const errorMessage =
         error instanceof Error
