@@ -8,11 +8,7 @@ import { ImageOfClinicAndSubsection } from "./sections/ImageOfClinicAndSubsectio
 import { InsuranceSectionSubsection } from "./sections/InsuranceSectionSubsection";
 import { LaboratorySectionSubsection } from "./sections/LaboratorySectionSubsection";
 import { BlogSection } from "./sections/BlogSection";
-<<<<<<< HEAD
-// import { BookingSection } from "./sections/BookingSection";
-=======
 import { BookingSection } from "./sections/BookingSection";
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
 import { AnimatedSection } from "../../components/ui/animated";
 import { BlogModal } from "../../components/ui/modal";
 
@@ -116,11 +112,6 @@ export const Box = () => {
         </AnimatedSection>
 
         {/* Booking Section - появляется с масштабированием */}
-<<<<<<< HEAD
-       
-
-        {/* Health Journey / Clinic - ДОБАВИТЬ ID */}
-=======
         <AnimatedSection
           animation="fadeInScale"
           delay={150}
@@ -130,8 +121,7 @@ export const Box = () => {
           <BookingSection />
         </AnimatedSection>
 
-        {/* Health Journey - появляется слева */}
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
+        {/* Health Journey / Clinic */}
         <AnimatedSection
           animation="fadeInLeft"
           delay={200}

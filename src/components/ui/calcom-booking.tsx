@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
-import { X, Calendar, Clock, DollarSign } from "lucide-react";
+import { X, Clock, DollarSign } from "lucide-react";
 import { Card, CardContent } from "./card";
 import { Button } from "./button";
 
@@ -10,7 +9,7 @@ interface Service {
   description: string;
   duration: string;
   price: string;
-  calLink: string; // Cal.com ссылка для этой услуги
+  calLink: string;
   icon: string;
 }
 
@@ -19,22 +18,6 @@ interface CalComBookingImprovedProps {
   onClose: () => void;
 }
 
-/**
- * Улучшенный компонент для интеграции Cal.com
- *
- * Инструкция по настройке:
- *
- * 1. Зарегистрируйтесь на https://cal.com
- * 2. Создайте "Event Type" для каждой услуги в вашей клинике
- * 3. Для каждого Event Type получите ссылку вида: username/event-slug
- * 4. Добавьте эти ссылки в массив services ниже
- * 5. Установите пакет: npm install @calcom/embed-react (опционально)
- *
- * Пример Event Types в Cal.com:
- * - Общая консультация: zoryx-clinic/general-consultation
- * - Кардиология: zoryx-clinic/cardiology
- * - Анализы крови: zoryx-clinic/blood-tests
- */
 export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
   isOpen,
   onClose,
@@ -42,8 +25,6 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
   const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [showCalendar, setShowCalendar] = useState(false);
 
-  // Список услуг с Cal.com ссылками
-  // ЗАМЕНИ эти ссылки на свои после настройки Cal.com!
   const services: Service[] = [
     {
       id: "1",
@@ -51,7 +32,7 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
       description: "Первичный прием врача общей практики",
       duration: "30 мин",
       price: "3000 ₽",
-      calLink: "https://cal.com/zorych-clinic-y4wc5f/30min", // ЗАМЕНИ на свою ссылку
+      calLink: "https://cal.com/zorych-clinic-y4wc5f/30min",
       icon: "👨‍⚕️",
     },
     {
@@ -60,7 +41,7 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
       description: "Консультация кардиолога с ЭКГ",
       duration: "45 мин",
       price: "4500 ₽",
-      calLink: "zoryx-clinic/cardiology", // ЗАМЕНИ на свою ссылку
+      calLink: "zoryx-clinic/cardiology",
       icon: "❤️",
     },
     {
@@ -69,7 +50,7 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
       description: "Общий и биохимический анализ",
       duration: "15 мин",
       price: "2500 ₽",
-      calLink: "zoryx-clinic/blood-tests", // ЗАМЕНИ на свою ссылку
+      calLink: "zoryx-clinic/blood-tests",
       icon: "🩸",
     },
     {
@@ -78,7 +59,7 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
       description: "Консультация стоматолога",
       duration: "40 мин",
       price: "3500 ₽",
-      calLink: "zoryx-clinic/dentistry", // ЗАМЕНИ на свою ссылку
+      calLink: "zoryx-clinic/dentistry",
       icon: "🦷",
     },
     {
@@ -87,7 +68,7 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
       description: "Ультразвуковое исследование",
       duration: "30 мин",
       price: "4000 ₽",
-      calLink: "zoryx-clinic/ultrasound", // ЗАМЕНИ на свою ссылку
+      calLink: "zoryx-clinic/ultrasound",
       icon: "📊",
     },
     {
@@ -96,50 +77,19 @@ export const CalComBookingImproved: React.FC<CalComBookingImprovedProps> = ({
       description: "Полный комплекс лабораторных исследований",
       duration: "20 мин",
       price: "3200 ₽",
-      calLink: "zoryx-clinic/lab-tests", // ЗАМЕНИ на свою ссылку
+      calLink: "zoryx-clinic/lab-tests",
       icon: "🔬",
     },
   ];
 
-  // Загрузка Cal.com embed скрипта
   useEffect(() => {
     if (isOpen && showCalendar) {
-=======
-import React, { useEffect } from "react";
-import { X } from "lucide-react";
-
-interface CalComBookingProps {
-  isOpen: boolean;
-  onClose: () => void;
-  calLink?: string; // например: "your-clinic/consultation"
-}
-
-/**
- * Компонент для интеграции Cal.com
- *
- * Инструкция по настройке:
- * 1. Зарегистрируйтесь на https://cal.com
- * 2. Создайте событие (event type) для каждой услуги
- * 3. Получите ссылку вида: username/event-slug
- * 4. Установите: npm install @calcom/embed-react
- * 5. Используйте этот компонент
- */
-export const CalComBooking: React.FC<CalComBookingProps> = ({
-  isOpen,
-  onClose,
-  calLink = "demo/30min", // Демо-ссылка
-}) => {
-  useEffect(() => {
-    if (isOpen) {
-      // Загрузка Cal.com embed скрипта
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
       const script = document.createElement("script");
       script.src = "https://app.cal.com/embed/embed.js";
       script.async = true;
       document.body.appendChild(script);
 
       return () => {
-<<<<<<< HEAD
         if (document.body.contains(script)) {
           document.body.removeChild(script);
         }
@@ -162,27 +112,17 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
     setSelectedService(null);
     onClose();
   };
-=======
-        document.body.removeChild(script);
-      };
-    }
-  }, [isOpen]);
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
 
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Overlay */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
-<<<<<<< HEAD
         onClick={handleClose}
       />
 
-      {/* Modal */}
       <div className="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-2xl shadow-2xl m-4 overflow-hidden animate-in fade-in-0 zoom-in-95 duration-300">
-        {/* Header */}
         <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -232,13 +172,11 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
           )}
         </div>
 
-        {/* Content */}
         <div
           className="overflow-y-auto"
           style={{ maxHeight: "calc(90vh - 120px)" }}
         >
           {!showCalendar ? (
-            // Шаг 1: Выбор услуги
             <div className="p-6">
               <p className="text-gray-600 text-center mb-6">
                 Выберите услугу для записи на прием
@@ -277,26 +215,23 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
                 ))}
               </div>
 
-              {/* Дополнительная информация */}
               <div className="mt-8 bg-blue-50 rounded-lg p-6">
                 <h3 className="font-semibold text-gray-800 mb-3">
-                  ℹ️ Информация о записи
+                  Информация о записи
                 </h3>
                 <ul className="space-y-2 text-sm text-gray-600">
-                  <li>✓ Запись доступна 24/7 онлайн</li>
-                  <li>✓ Вы получите подтверждение на email</li>
-                  <li>✓ Можно выбрать удобное время</li>
-                  <li>✓ Напоминание за 24 часа до визита</li>
-                  <li>✓ Возможность переноса или отмены записи</li>
+                  <li>Запись доступна 24/7 онлайн</li>
+                  <li>Вы получите подтверждение на email</li>
+                  <li>Можно выбрать удобное время</li>
+                  <li>Напоминание за 24 часа до визита</li>
+                  <li>Возможность переноса или отмены записи</li>
                 </ul>
               </div>
             </div>
           ) : (
-            // Шаг 2: Cal.com календарь
             <div className="p-6">
               {selectedService && (
                 <>
-                  {/* Информация об услуге */}
                   <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg p-4 mb-6 border border-blue-200">
                     <div className="flex items-start gap-4">
                       <div className="text-4xl">{selectedService.icon}</div>
@@ -320,7 +255,6 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
                     </div>
                   </div>
 
-                  {/* Cal.com Inline Embed */}
                   <div
                     className="rounded-lg overflow-hidden border border-gray-200"
                     style={{ minHeight: "700px" }}
@@ -332,7 +266,6 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
                     />
                   </div>
 
-                  {/* Дополнительные инструкции */}
                   <div className="mt-6 text-center text-sm text-gray-500">
                     <p>
                       После выбора даты и времени вы сможете заполнить форму и
@@ -343,32 +276,6 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
               )}
             </div>
           )}
-=======
-        onClick={onClose}
-      />
-
-      {/* Modal */}
-      <div className="relative w-full max-w-4xl max-h-[90vh] bg-white rounded-2xl shadow-2xl m-4 overflow-hidden">
-        {/* Header */}
-        <div className="sticky top-0 z-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4 flex items-center justify-between">
-          <h2 className="text-xl font-bold">Запись на прием</h2>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-white/20 rounded-full transition-colors"
-          >
-            <X size={24} />
-          </button>
-        </div>
-
-        {/* Cal.com Embed */}
-        <div className="p-4 overflow-y-auto" style={{ height: "calc(90vh - 80px)" }}>
-          {/* Inline embed */}
-          <div
-            data-cal-link={calLink}
-            data-cal-config='{"layout":"month_view","theme":"light"}'
-            style={{ width: "100%", height: "100%", minHeight: "600px" }}
-          />
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
         </div>
       </div>
     </div>
@@ -376,24 +283,13 @@ export const CalComBooking: React.FC<CalComBookingProps> = ({
 };
 
 /**
-<<<<<<< HEAD
  * Альтернативный компонент: Кнопка с Popup
- * Использует Cal.com popup вместо inline embed
  */
 export const CalComPopupButton: React.FC<{
   calLink: string;
   children: React.ReactNode;
   className?: string;
 }> = ({ calLink, children, className = "" }) => {
-=======
- * Альтернатива: Popup embed
- * Просто добавьте кнопку с атрибутом data-cal-link
- */
-export const CalComButton: React.FC<{ calLink: string; children: React.ReactNode }> = ({
-  calLink,
-  children,
-}) => {
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://app.cal.com/embed/embed.js";
@@ -401,26 +297,17 @@ export const CalComButton: React.FC<{ calLink: string; children: React.ReactNode
     document.body.appendChild(script);
 
     return () => {
-<<<<<<< HEAD
       if (document.body.contains(script)) {
         document.body.removeChild(script);
       }
-=======
-      document.body.removeChild(script);
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
     };
   }, []);
 
   return (
     <button
       data-cal-link={calLink}
-<<<<<<< HEAD
       data-cal-config='{"layout":"month_view","theme":"light"}'
       className={`${className} cursor-pointer`}
-=======
-      data-cal-config='{"layout":"month_view"}'
-      className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all hover:scale-105"
->>>>>>> 843035cf65e932d6ebc75a69d626c1fcd30f74a7
     >
       {children}
     </button>
