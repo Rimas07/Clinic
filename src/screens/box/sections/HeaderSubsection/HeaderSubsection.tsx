@@ -6,6 +6,7 @@ import { Auth, signOutUser, useAuthState } from "../../../../auth/auth";
 import { User } from "firebase/auth";
 import { useI18n } from "../../../../lib/i18n";
 import { Language } from "../../../../lib/translations";
+import { getPublicAssetUrl } from "../../../../lib/utils";
 
 const languages = [
   { code: "en" as Language, name: "English" },
@@ -16,13 +17,13 @@ const languages = [
 const socialLinks = [
   {
     type: "video",
-    src: "/facebook.mp4",
+    src: getPublicAssetUrl("facebook.mp4"),
     alt: "Facebook",
     href: "https://facebook.com",
   },
   {
     type: "video",
-    src: "/instagram.mp4",
+    src: getPublicAssetUrl("instagram.mp4"),
     alt: "Instagram",
     href: "https://instagram.com",
   },
@@ -38,12 +39,25 @@ export const HeaderSubsection = () => {
     languages.find((lang) => lang.code === language) || languages[0];
 
   const navigationItems = [
-    { label: t.header.clinic },
-    { label: t.header.consultation },
-    { label: t.header.laboratory },
-    { label: t.header.blog },
-    { label: t.header.insurances },
-  ];
+    { label: t.header.clinic, sectionId: "clinic" },
+    { label: t.header.consultation, sectionId: "consultation" },
+    { label: t.header.laboratory, sectionId: "laboratory" },
+    { label: t.header.blog, sectionId: "blog" },
+    { label: t.header.insurances, sectionId: "insurances" },
+  ]
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerOffset = 120; // Высота header
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   useEffect(() => {
     const unsubscribe = useAuthState((user) => {
@@ -57,7 +71,7 @@ export const HeaderSubsection = () => {
     await signOutUser();
   };
 
-  return (
+ return (
     <header className="relative w-full bg-transparent">
       <div className="relative w-full h-[120px] bg-white">
         <div className="flex items-center justify-between w-full h-full px-6 lg:px-12">
@@ -79,7 +93,8 @@ export const HeaderSubsection = () => {
                 <Button
                   key={index}
                   variant="ghost"
-                  className="h-auto px-4 py-2 [font-family:'Inter',Helvetica] font-normal text-[#0d141a] text-base tracking-[0] leading-6 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 hover-scale rounded-lg"
+                  onClick={() => scrollToSection(item.sectionId)} // ← ДОБАВИТЬ onClick
+                  className="h-auto px-4 py-2 [font-family:'Inter',Helvetica] font-normal text-[#0d141a] text-base tracking-[0] leading-6 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 hover-scale rounded-lg cursor-pointer"
                 >
                   {item.label}
                 </Button>

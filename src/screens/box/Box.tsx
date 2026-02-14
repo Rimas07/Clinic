@@ -8,6 +8,7 @@ import { ImageOfClinicAndSubsection } from "./sections/ImageOfClinicAndSubsectio
 import { InsuranceSectionSubsection } from "./sections/InsuranceSectionSubsection";
 import { LaboratorySectionSubsection } from "./sections/LaboratorySectionSubsection";
 import { BlogSection } from "./sections/BlogSection";
+// import { BookingSection } from "./sections/BookingSection";
 import { AnimatedSection } from "../../components/ui/animated";
 import { BlogModal } from "../../components/ui/modal";
 
@@ -70,7 +71,7 @@ export const Box = () => {
     setSelectedArticle(null);
   };
 
-  return (
+ return (
     <main
       className="w-full min-h-screen bg-gradient-to-br from-blue-50 via-white to-indigo-50 relative overflow-hidden"
       data-model-id="87:40-frame"
@@ -110,52 +111,60 @@ export const Box = () => {
           <DnaPosterSubsection />
         </AnimatedSection>
 
-        {/* Health Journey - появляется слева */}
+        {/* Booking Section - появляется с масштабированием */}
+       
+
+        {/* Health Journey / Clinic - ДОБАВИТЬ ID */}
         <AnimatedSection
           animation="fadeInLeft"
           delay={200}
           duration={1.2}
           className="w-full"
+          id="clinic" // ← ДОБАВИТЬ
         >
           <HealthJourneySubsection />
         </AnimatedSection>
 
-        {/* Consultation - появляется справа */}
+        {/* Consultation - ДОБАВИТЬ ID */}
         <AnimatedSection
           animation="fadeInRight"
           delay={300}
           duration={1.2}
           className="w-full"
+          id="consultation" // ← ДОБАВИТЬ
         >
           <ConsultationSectionSubsection />
         </AnimatedSection>
 
-        {/* Insurance - появляется с масштабированием */}
+        {/* Insurance - ДОБАВИТЬ ID */}
         <AnimatedSection
           animation="fadeInScale"
           delay={400}
           duration={1.0}
           className="w-full"
+          id="insurances" // ← ДОБАВИТЬ
         >
           <InsuranceSectionSubsection />
         </AnimatedSection>
 
-        {/* Blog - появляется снизу */}
+        {/* Blog - ДОБАВИТЬ ID */}
         <AnimatedSection
           animation="slideInBottom"
           delay={500}
           duration={1.2}
           className="w-full"
+          id="blog" // ← ДОБАВИТЬ
         >
           <BlogSection onArticleClick={handleBlogClick} />
         </AnimatedSection>
 
-        {/* Laboratory - появляется снизу */}
+        {/* Laboratory - ДОБАВИТЬ ID */}
         <AnimatedSection
           animation="fadeInUp"
           delay={600}
           duration={1.2}
           className="w-full"
+          id="laboratory" // ← ДОБАВИТЬ
         >
           <LaboratorySectionSubsection />
         </AnimatedSection>

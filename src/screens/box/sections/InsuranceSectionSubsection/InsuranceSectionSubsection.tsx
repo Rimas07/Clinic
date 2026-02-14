@@ -3,15 +3,17 @@ import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { InsuranceModal } from "../../../../components/ui/modal";
 import { useI18n } from "../../../../lib/i18n";
-
+import { BookingModal } from "../../../../components/ui/booking-modal";
+import { InsuranceBookingModal } from "../../../../components/ui/insurance-booking-modal";
+import { getPublicAssetUrl } from "../../../../lib/utils";
 const insuranceLogos = [
   {
-    src: "/AXA_Logo.svg 2.png",
+    src: getPublicAssetUrl("AXA_Logo.svg 2.png"),
     alt: "AXA Insurance",
     className: "w-[100px] h-[100px]",
     insurance: {
       name: "AXA Smart Coverage",
-      logo: "/AXA_Logo.svg 2.png",
+      logo: getPublicAssetUrl("AXA_Logo.svg 2.png"),
       description:
         "Comprehensive health insurance coverage designed for expats and international residents in the Czech Republic. AXA provides reliable protection with extensive network coverage.",
       duration: "12 months coverage",
@@ -33,12 +35,12 @@ const insuranceLogos = [
     },
   },
   {
-    src: "/uniq logo.png",
+    src: getPublicAssetUrl("uniq logo.png"),
     alt: "UNIQA Insurance",
     className: "w-[100px] h-[100px]",
     insurance: {
       name: "UNIQA Health Plus",
-      logo: "/uniq logo.png",
+      logo: getPublicAssetUrl("uniq logo.png"),
       description:
         "Premium health insurance with comprehensive coverage for individuals and families. UNIQA offers flexible plans tailored to your specific healthcare needs.",
       duration: "6-24 months flexible",
@@ -60,12 +62,12 @@ const insuranceLogos = [
     },
   },
   {
-    src: "/pvzp .png",
+    src: getPublicAssetUrl("pvzp .png"),
     alt: "PVZP Insurance",
     className: "w-[100px] h-[100px]",
     insurance: {
       name: "PVZP Comprehensive",
-      logo: "/pvzp .png",
+      logo: getPublicAssetUrl("pvzp .png"),
       description:
         "Leading Czech insurance provider offering extensive healthcare coverage with deep local expertise and comprehensive medical network access.",
       duration: "12 months standard",
@@ -87,12 +89,12 @@ const insuranceLogos = [
     },
   },
   {
-    src: "/maxima logo.png",
+    src: getPublicAssetUrl("maxima logo.png"),
     alt: "MAXIMA Insurance",
     className: "w-[100px] h-[100px]",
     insurance: {
       name: "MAXIMA Premium",
-      logo: "/maxima logo.png",
+      logo: getPublicAssetUrl("maxima logo.png"),
       description:
         "High-quality health insurance with premium benefits and exceptional customer service. MAXIMA focuses on providing comprehensive coverage with personalized care.",
       duration: "12-36 months",
@@ -114,12 +116,12 @@ const insuranceLogos = [
     },
   },
   {
-    src: "/slavia logo.png",
+    src: getPublicAssetUrl("slavia logo.png"),
     alt: "SLAVIA Insurance",
     className: "w-[100px] h-[100px]",
     insurance: {
       name: "SLAVIA Essential",
-      logo: "/slavia logo.png",
+      logo: getPublicAssetUrl("slavia logo.png"),
       description:
         "Affordable and reliable health insurance solution for students and young professionals. SLAVIA provides essential coverage at competitive rates.",
       duration: "6-12 months",
@@ -146,7 +148,7 @@ export const InsuranceSectionSubsection = () => {
   const { t } = useI18n();
   const [selectedInsurance, setSelectedInsurance] = useState<any>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+ const [isInsuranceBookingOpen, setIsInsuranceBookingOpen] = useState(false);
   const features = [
     {
       icon: "🕐",
@@ -189,7 +191,7 @@ export const InsuranceSectionSubsection = () => {
       {/* Иллюстрация справа - используем существующее изображение */}
       <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-1/3 h-full pointer-events-none z-20">
         <div className="relative w-full h-full flex items-center justify-center">
-          <img className="w-full h-auto" alt="Mask group" src="pic loog.png" />
+          <img className="w-50 h-50" alt="Mask group" src={getPublicAssetUrl("pic loog.png")} />
         </div>
       </div>
 
@@ -254,20 +256,22 @@ export const InsuranceSectionSubsection = () => {
             ))}
           </div>
 
-          <Button className="h-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-[200px] px-10 py-[18px] hover-lift hover-glow transition-all duration-300">
-            <span className="[font-family:'Roboto',Helvetica] font-semibold text-white text-base leading-6">
-              {t.insurance.buyInsurance}
-            </span>
-          </Button>
+          <Button 
+  onClick={() => setIsInsuranceBookingOpen(true)}
+  className="h-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-[200px] px-10 py-[18px] hover-lift hover-glow transition-all duration-300"
+>
+  <span className="[font-family:'Roboto',Helvetica] font-semibold text-white text-base leading-6">
+    {t.insurance.buyInsurance}
+  </span>
+</Button>
         </div>
       </div>
 
       {/* Insurance Modal */}
-      <InsuranceModal
-        isOpen={isModalOpen}
-        onClose={closeModal}
-        insurance={selectedInsurance}
-      />
+      <InsuranceBookingModal
+  isOpen={isInsuranceBookingOpen}
+  onClose={() => setIsInsuranceBookingOpen(false)}
+/>
     </section>
   );
 };

@@ -3,9 +3,15 @@ import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import { DoctorModal } from "../../../../components/ui/modal";
 import { useI18n } from "../../../../lib/i18n";
+import { BookingModal } from "../../../../components/ui/booking-modal";
 
 export const ConsultationSectionSubsection = () => {
   const { t } = useI18n();
+
+const [selectedDoctor, setSelectedDoctor] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+
 
   const featureCards = [
     {
@@ -190,8 +196,6 @@ export const ConsultationSectionSubsection = () => {
     },
   ];
 
-  const [selectedDoctor, setSelectedDoctor] = useState<any>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSpecialtyClick = (specialty: any) => {
     setSelectedDoctor(specialty.doctor);
@@ -341,9 +345,12 @@ export const ConsultationSectionSubsection = () => {
             </div>
 
             <div className="flex justify-center">
-              <Button className="h-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-[200px] px-14 py-4 hover-lift hover-glow transition-all duration-300 animate-pulse-slow">
-                <span className="[font-family:'Roboto',Helvetica] font-semibold text-white text-base tracking-[0] leading-6">
-                  {t.consultation.bookNow}
+             <Button 
+            onClick={() => setIsBookingModalOpen(true)} // ← ИЗМЕНИТЬ
+            className="h-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-[200px] px-14 py-4 hover-lift hover-glow transition-all duration-300 animate-pulse-slow"
+          >
+            <span className="[font-family:'Roboto',Helvetica] font-semibold text-white text-base tracking-[0] leading-6">
+              {t.consultation.bookNow}
                 </span>
               </Button>
             </div>
@@ -356,6 +363,12 @@ export const ConsultationSectionSubsection = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         doctor={selectedDoctor}
+      />
+
+      {/* Booking Modal - ДОБАВИТЬ */}
+      <BookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
       />
     </section>
   );

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { useI18n } from "../../../../lib/i18n";
 import { Card, CardContent } from "../../../../components/ui/card";
+import { LaboratoryBookingModal } from "../../../../components/ui/laboratory-booking-modal";
+import { getPublicAssetUrl } from "../../../../lib/utils";
 
 export const LaboratorySectionSubsection = () => {
   const { t } = useI18n();
-
+const [isLabBookingOpen, setIsLabBookingOpen] = useState(false);
   const testCategories = [
     {
       title: t.laboratory.bloodTests,
@@ -129,16 +131,19 @@ export const LaboratorySectionSubsection = () => {
               ))}
             </div>
 
-            <Button className="bg-blue-800 hover:bg-blue-900 rounded-[200px] h-[50px] px-6 [font-family:'Roboto',Helvetica] font-semibold text-white text-sm tracking-[0] transition-colors">
-              {t.laboratory.scheduleTest}
-            </Button>
+            <Button 
+  onClick={() => setIsLabBookingOpen(true)}
+  className="bg-blue-800 hover:bg-blue-900 rounded-[200px] h-[50px] px-6 [font-family:'Roboto',Helvetica] font-semibold text-white text-sm tracking-[0] transition-colors"
+>
+  {t.laboratory.scheduleTest}
+</Button> 
           </div>
 
           {/* Right Column - Image */}
           <div className="relative order-1 lg:order-2 flex items-center justify-center">
             <img
               alt="Laboratory scientist"
-              src="/lab  pic.png"
+              src={getPublicAssetUrl("lab  pic.png")}
               className="w-full h-auto max-w-full"
               style={{
                 maxHeight: "600px",
@@ -150,6 +155,10 @@ export const LaboratorySectionSubsection = () => {
           </div>
         </div>
       </div>
+     <LaboratoryBookingModal
+  isOpen={isLabBookingOpen}
+  onClose={() => setIsLabBookingOpen(false)}
+/>
     </section>
   );
 };

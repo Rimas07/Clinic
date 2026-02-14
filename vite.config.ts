@@ -9,5 +9,5 @@ export default defineConfig(({ mode }) => ({
         ...(mode === "development" ? [screenGraphPlugin()] : [])
     ],
     publicDir: "./public",
-    base: "./",
+    base: "/",
 }));

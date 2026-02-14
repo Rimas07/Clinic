@@ -13,6 +13,7 @@ interface AnimatedSectionProps {
   delay?: number;
   duration?: number;
   threshold?: number;
+  id?: string;
 }
 
 export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
@@ -22,6 +23,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   delay = 0,
   duration = 0.8,
   threshold = 0.1,
+  id,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -64,6 +66,7 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   return (
     <div
       ref={ref}
+      id={id}
       className={`${className} transition-all duration-1000 ${
         isVisible ? animationClasses[animation] : "opacity-0 translate-y-8"
       }`}

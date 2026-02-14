@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { useI18n } from "../../../../lib/i18n";
+import { UnifiedBookingModal } from "../../../../components/ui/unified-booking-modal";
+import { getPublicAssetUrl } from "../../../../lib/utils";
 
 export const DnaPosterSubsection = () => {
   const { t } = useI18n();
+    const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   return (
     <section className="w-full bg-white">
       <div className="w-full flex justify-center">
@@ -29,8 +32,8 @@ export const DnaPosterSubsection = () => {
               e.currentTarget.play();
             }}
           >
-            <source src="/dna-poster-video.mp4" type="video/mp4" />
-            <source src="/dna-poster-video.webm" type="video/webm" />
+            <source src={getPublicAssetUrl("dna-poster-video.mp4")} type="video/mp4" />
+            <source src={getPublicAssetUrl("dna-poster-video.webm")} type="video/webm" />
             Ваш браузер не поддерживает видео.
           </video>
 
@@ -49,8 +52,9 @@ export const DnaPosterSubsection = () => {
 
               {/* Buttons */}
               <div className="flex gap-4 justify-center">
-                <Button
+                 <Button
                   variant="outline"
+                  onClick={() => setIsBookingModalOpen(true)}
                   className="bg-white text-blue-600 border-blue-600 hover:bg-blue-50 px-8 py-3 text-lg font-medium"
                 >
                   {t.dnaPoster.scheduleNow}
@@ -63,6 +67,10 @@ export const DnaPosterSubsection = () => {
           </div>
         </div>
       </div>
+       <UnifiedBookingModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
     </section>
   );
 };
